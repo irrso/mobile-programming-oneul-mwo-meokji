@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class shopFragment extends Fragment {
+public class ShopFragment extends Fragment {
 
     ImageView imageView;
     String url;
@@ -23,7 +23,7 @@ public class shopFragment extends Fragment {
     private String mParam1;
     private String mParam2;*/
 
-    public shopFragment(String url) {
+    public ShopFragment(String url) {
         // Required empty public constructor
         this.url = url;
     }

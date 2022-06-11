@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/button_round.xml" value="0.1" />
-        <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/button_round_clicked.xml" value="0.1" />
+        <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/layout/activity_dislike.xml" value="0.1" />
+        <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/layout/fragment_dislike.xml" value="0.22" />
         <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/layout/fragment_shop.xml" value="0.1" />
       </map>
     </option>

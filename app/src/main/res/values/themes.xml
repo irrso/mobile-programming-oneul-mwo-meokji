@@ -13,4 +13,13 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="custom_dialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 배경 dim 설정 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 0.0 (투명) ~ 1.0 (검정색) 값을 가집니다 -->
+        <item name="android:backgroundDimAmount">0.8</item>
+    </style>
 </resources>

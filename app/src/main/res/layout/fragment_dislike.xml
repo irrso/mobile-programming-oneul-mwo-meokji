@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ScrollView
+            android:id="@+id/ScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:animateLayoutChanges="true"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/CategLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/Categ1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <android.widget.Button
+                        android:id="@+id/bibimbap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="비빔밥"
+                        android:textAllCaps="false"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <android.widget.Button
+                        android:id="@+id/calgooksu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="칼국수"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <android.widget.Button
+                        android:id="@+id/gooksu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="국수"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <android.widget.Button
+                        android:id="@+id/gookbap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="국밥"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Categ2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <android.widget.Button
+                        android:id="@+id/haejanggook"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="해장국"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <android.widget.Button
+                        android:id="@+id/gopchang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="곱창"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <android.widget.Button
+                        android:id="@+id/ssapbap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="쌈밥"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Categ3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <android.widget.Button
+                        android:id="@+id/budaezzigae"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:text="부대찌개"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <android.widget.Button
+                        android:id="@+id/zzimdark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="찜닭"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <android.widget.Button
+                        android:id="@+id/soondae"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="순대"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <android.widget.Button
+                        android:id="@+id/naengmyen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="냉면"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Categ4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <android.widget.Button
+                        android:id="@+id/gogi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="고기"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <android.widget.Button
+                        android:id="@+id/zockbal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="족발"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+                    <android.widget.Button
+                        android:id="@+id/dosirock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="도시락"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Categ5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <android.widget.Button
+                        android:id="@+id/pasta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="파스타"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <android.widget.Button
+                        android:id="@+id/dongas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="돈가스"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <android.widget.Button
+                        android:id="@+id/steak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:text="스테이크"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <android.widget.Button
+                        android:id="@+id/pizza"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="피자"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Categ6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <android.widget.Button
+                        android:id="@+id/pilaf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="필라프"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <android.widget.Button
+                        android:id="@+id/hamburger"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="햄버거"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <android.widget.Button
+                        android:id="@+id/sandwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:text="샌드위치"
+                        android:textColor="#919191"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Categ7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <android.widget.Button
+                        android:id="@+id/toast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="토스트"
+                        android:textColor="#919191"
+                        android:textStyle="bold" />
+
+                    <android.widget.Button
+                        android:id="@+id/kebap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="케밥"
+                        android:textColor="#919191"
+                        android:textStyle="bold" />
+
+                    <android.widget.Button
+                        android:id="@+id/soba"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="소바"
+                        android:textColor="#919191"
+                        android:textStyle="bold" />
+
+                    <android.widget.Button
+                        android:id="@+id/ramen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="라멘"
+                        android:textColor="#919191"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Categ8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <android.widget.Button
+                        android:id="@+id/chobap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="초밥"
+                        android:textColor="#919191"
+                        android:textStyle="bold" />
+
+                    <android.widget.Button
+                        android:id="@+id/hoe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="회"
+                        android:textColor="#919191"
+                        android:textStyle="bold" />
+
+                    <android.widget.Button
+                        android:id="@+id/yeoneh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="연어"
+                        android:textColor="#919191"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Categ9"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <android.widget.Button
+                        android:id="@+id/oodong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="우동"
+                        android:textColor="#919191"
+                        android:textStyle="bold" />
+
+                    <android.widget.Button
+                        android:id="@+id/kare"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="카레"
+                        android:textColor="#919191"
+                        android:textStyle="bold" />
+
+                    <android.widget.Button
+                        android:id="@+id/zzazangmyen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="짜장면"
+                        android:textColor="#919191"
+                        android:textStyle="bold" />
+
+                    <android.widget.Button
+                        android:id="@+id/zzamppong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="짬뽕"
+                        android:textColor="#919191"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Categ10"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <android.widget.Button
+                        android:id="@+id/maratang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="마라탕"
+                        android:textColor="#919191"
+                        android:textStyle="bold" />
+
+                    <android.widget.Button
+                        android:id="@+id/tangsuyook"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="탕수육"
+                        android:textColor="#919191"
+                        android:textStyle="bold" />
+
+                    <android.widget.Button
+                        android:id="@+id/tteokboki"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="떡볶이"
+                        android:textColor="#919191"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Categ11"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <android.widget.Button
+                        android:id="@+id/kimbap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="115dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="김밥"
+                        android:textColor="#919191"
+                        android:textStyle="bold" />
+
+                    <android.widget.Button
+                        android:id="@+id/chicken"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="115dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round"
+                        android:minHeight="35dp"
+                        android:text="치킨"
+                        android:textColor="#919191"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
