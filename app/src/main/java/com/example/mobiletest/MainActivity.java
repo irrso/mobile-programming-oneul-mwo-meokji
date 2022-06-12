@@ -2,6 +2,7 @@ package com.example.mobiletest;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.animation.LayoutTransition;
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 scrollView.setVisibility(v);
             }
         });*/
+
         // 비선호 팝업
         prefBtn = findViewById(R.id.dislikeBtn);
         prefBtn.setOnClickListener(new View.OnClickListener() {
@@ -176,14 +178,14 @@ public class MainActivity extends AppCompatActivity {
     //음식점 불러오기
     public void readExcel(){
         try{
-            InputStream is = getBaseContext().getResources().getAssets().open("chicken.xls");
+            InputStream is = getBaseContext().getResources().getAssets().open("crawling.xls");
             POIFSFileSystem fs = new POIFSFileSystem(is);
             HSSFWorkbook wb = new HSSFWorkbook(fs);
 
             int rowIdx = 0;
             int colIdx = 0;
             //시트 수
-            Sheet sheet = wb.getSheet("치킨");
+            Sheet sheet = wb.getSheet("파스타");
             //행의 수
             int rowTotal = sheet.getPhysicalNumberOfRows();
             for(rowIdx = 0; rowIdx < rowTotal; rowIdx++){
@@ -215,14 +217,14 @@ public class MainActivity extends AppCompatActivity {
                                     break;
                             }
                         }
-                        //Log.d("chicken", value);
+                        Log.d("crawling", value);
                     }
                 }
             }
-            Log.d("excel", "됨");
+            Log.d("crawling", "됨");
         }catch (Exception e){
             e.printStackTrace();
-            Log.d("excel", "안됨");
+            Log.d("crawling", "안됨");
         }
     }
 
