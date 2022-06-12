@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ShopFragment extends Fragment {
@@ -15,6 +16,7 @@ public class ShopFragment extends Fragment {
     ImageView imageView;
     String url;
     ImageLoadTask task;
+    TextView name, rank, distance;
     int x;
 
     /*private static final String ARG_PARAM1 = "param1";
@@ -49,21 +51,26 @@ public class ShopFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView = (ViewGroup) inflater.inflate(R.layout.fragment_shop, container, false);
 
-        ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_shop, container, false);
-
-       // Toast.makeText(getActivity(), url, Toast.LENGTH_SHORT).show();
-
-        imageView = (ImageView)rootView.findViewById(R.id.shopImage);
+        name = rootView.findViewById(R.id.name);
+        rank = rootView.findViewById(R.id.rank);
+        distance = rootView.findViewById(R.id.distance);
+        imageView = (ImageView) rootView.findViewById(R.id.shopImage);
         task = new ImageLoadTask(url, imageView);
         task.execute();
-        //뒤로 가면 오류뜸
-
-
-        //x = ((MainActivity)MainActivity.context).num_page;
-        //Toast.makeText(getActivity(), String.valueOf(x), Toast.LENGTH_SHORT).show();
+        transContext();
 
         return rootView;
+    }
+
+    public void transContext() {
+        for (int i = 0; i < ((MainActivity) MainActivity.context).num_page; i++) {
+            if (((MainActivity) MainActivity.context).pager.getCurrentItem() == i) {
+                name.setText(((MainActivity) MainActivity.context).name[i]);
+                rank.setText(((MainActivity) MainActivity.context).rank[i]);
+                distance.setText(((MainActivity) MainActivity.context).distance[i]+"km");
+            }
+        }
     }
 }
