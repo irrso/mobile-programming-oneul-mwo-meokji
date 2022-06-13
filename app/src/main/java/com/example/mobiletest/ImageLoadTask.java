@@ -30,10 +30,10 @@ public class ImageLoadTask extends AsyncTask<Void,Void, Bitmap> {
         try {
             if (bitmapHash.containsKey(urlStr)) {
                 Bitmap oldbitmap = bitmapHash.remove(urlStr);
-                if(oldbitmap != null) {
+                /*if(oldbitmap != null) {
                     oldbitmap.recycle();
                     oldbitmap = null;
-                }
+                }*/
             }
             URL url = new URL(urlStr);
             bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());

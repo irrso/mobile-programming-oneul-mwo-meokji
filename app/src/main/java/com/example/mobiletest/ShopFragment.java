@@ -1,23 +1,20 @@
 package com.example.mobiletest;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ShopFragment extends Fragment {
 
     ImageView imageView;
-    String url;
+    String name, rank, imageURL;
+    Double distance;
+    TextView nameText, rankText, distanceText;
     ImageLoadTask task;
-    TextView name, rank, distance;
-    int x;
 
     /*private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -25,11 +22,13 @@ public class ShopFragment extends Fragment {
     private String mParam1;
     private String mParam2;*/
 
-    public ShopFragment(String url) {
-        // Required empty public constructor
-        this.url = url;
-    }
+    public ShopFragment(String name, String rank, Double distance, String imageURL){
+        this.name = name;
+        this.rank = rank;
+        this.distance = distance;
+        this.imageURL = imageURL;
 
+    }
     /*public static shopFragment newInstance(String param1, String param2) {
         shopFragment fragment = new shopFragment();
         Bundle args = new Bundle();
@@ -53,24 +52,13 @@ public class ShopFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = (ViewGroup) inflater.inflate(R.layout.fragment_shop, container, false);
 
-        name = rootView.findViewById(R.id.name);
-        rank = rootView.findViewById(R.id.rank);
-        distance = rootView.findViewById(R.id.distance);
+        nameText = rootView.findViewById(R.id.name); nameText.setText(name);
+        rankText= rootView.findViewById(R.id.rank); rankText.setText(rank);
+        distanceText = rootView.findViewById(R.id.distance); distanceText.setText(""+distance);
         imageView = (ImageView) rootView.findViewById(R.id.shopImage);
-        task = new ImageLoadTask(url, imageView);
+        task = new ImageLoadTask(imageURL, imageView);
         task.execute();
-        transContext();
 
         return rootView;
-    }
-
-    public void transContext() {
-        for (int i = 0; i < ((MainActivity) MainActivity.context).num_page; i++) {
-            if (((MainActivity) MainActivity.context).pager.getCurrentItem() == i) {
-                name.setText(((MainActivity) MainActivity.context).name[i]);
-                rank.setText(((MainActivity) MainActivity.context).rank[i]);
-                distance.setText(((MainActivity) MainActivity.context).distance[i]+"km");
-            }
-        }
     }
 }
