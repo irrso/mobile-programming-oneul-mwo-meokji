@@ -64,14 +64,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:text="5.0"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
                 <TextView
                     android:id="@+id/distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0.0km"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 

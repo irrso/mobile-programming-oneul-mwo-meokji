@@ -1,15 +1,19 @@
 package com.example.mobiletest;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -37,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     Button[] categBtn = new Button[6];
     int cId[] = { R.id.hansik, R.id.yangsik, R.id.illsik, R.id.jungsik, R.id.bunsik, R.id.fastfood };
     boolean[] category = new boolean[6];
+    int ctId[] = {R.id.hansik_t, R.id.yangsik_t, R.id.illsik_t, R.id.jungsik_t, R.id.bunsik_t, R.id.fastfood_t };
+    TextView[] categText = new TextView[6];
 
     public String[] name = new String[100];
     public String[] classfication = new String[100];
@@ -49,11 +55,15 @@ public class MainActivity extends AppCompatActivity {
     Vector<Vector<BasicInfo>> basicInfo;
     HashMap<String, Integer> nameToIdx;
     GetFood GF;
+    Typeface customFont;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //폰트 가져오기
+        customFont = ResourcesCompat.getFont(this, R.font.font_regular);
 
         //비선호 팝업
         prefBtn = findViewById(R.id.dislikeBtn);
@@ -87,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
                     setClicked(index);
                 }
             });
+        }
+
+        //카테고리 텍스트
+        for(int i = 0; i < 6; i++) {
+            categText[i] = findViewById(ctId[i]);
         }
 
         //가게 정보 팝업
@@ -158,8 +173,11 @@ public class MainActivity extends AppCompatActivity {
         /*for(int j = 0; j < 6; j++){
             if(category[j] == true){ categLayout[j].setBackgroundResource(R.drawable.layout_round); category[j] = false; }
         }*/
-        if(category[i] == false){ categLayout[i].setBackgroundResource(R.drawable.layout_round_clicked); category[i] = true; }
-        else{ categLayout[i].setBackgroundResource(R.drawable.layout_round); category[i] = false; }
+        if(category[i] == false){
+            categLayout[i].setBackgroundResource(R.drawable.layout_round_clicked);
+            categText[i].setTypeface(customFont, Typeface.BOLD); category[i] = true; }
+        else{ categLayout[i].setBackgroundResource(R.drawable.layout_round);
+            categText[i].setTypeface(customFont); category[i] = false; }
     }
 
     //크롤링 불러오기

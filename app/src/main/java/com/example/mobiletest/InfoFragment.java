@@ -15,8 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 public class InfoFragment extends DialogFragment {
 
-    Button closeBtn2;
-    TextView name, classification, phoneNum, worktime;
+    Button closeBtn2, phoneImg, timeImg;
+    TextView name, classification, phoneNum, phoneNum_t, worktime, worktime_t;
 
     /*public InfoFragment() {
         // Required empty public constructor
@@ -44,6 +44,10 @@ public class InfoFragment extends DialogFragment {
         classification = view.findViewById(R.id.classification);
         phoneNum = view.findViewById(R.id.phoneNum);
         worktime = view.findViewById(R.id.worktime);
+        phoneNum_t = view.findViewById(R.id.phoneNum_t);
+        worktime_t = view.findViewById(R.id.worktime_t);
+        phoneImg = view.findViewById(R.id.phoneImg);
+        timeImg = view.findViewById(R.id.timeImg);
 
         transContext();
 
@@ -64,7 +68,10 @@ public class InfoFragment extends DialogFragment {
                 classification.setText(((MainActivity)MainActivity.context).classfication[i]);
                 phoneNum.setText(((MainActivity)MainActivity.context).phoneNum[i]);
                 worktime.setText(((MainActivity)MainActivity.context).worktime[i]);
-
+                if(((MainActivity)MainActivity.context).name[i] != null){
+                    phoneNum_t.setText("전화번호"); phoneImg.setVisibility(View.VISIBLE);
+                    worktime_t.setText("영업시간"); timeImg.setVisibility(View.VISIBLE);
+                }
             }
         }
     }

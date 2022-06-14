@@ -11,6 +11,7 @@
         android:id="@+id/PrefLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:orientation="vertical">
 
         <android.widget.Button
@@ -57,7 +58,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="한식" />
+                android:text="한식"
+                android:textStyle="normal" />
 
         </LinearLayout>
 
@@ -86,7 +88,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="양식" />
+                android:text="양식"
+                android:textStyle="normal" />
         </LinearLayout>
 
         <LinearLayout
@@ -114,7 +117,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="일식" />
+                android:text="일식"
+                android:textStyle="normal" />
         </LinearLayout>
 
     </LinearLayout>
@@ -152,7 +156,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="중식" />
+                android:text="중식"
+                android:textStyle="normal" />
         </LinearLayout>
 
         <LinearLayout
@@ -180,7 +185,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="분식" />
+                android:text="분식"
+                android:textStyle="normal" />
         </LinearLayout>
 
         <LinearLayout
@@ -203,7 +209,7 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/fastfood_t"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
