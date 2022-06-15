@@ -1,11 +1,14 @@
 package com.example.mobiletest;
 
 import android.os.Bundle;
+
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ShopFragment extends Fragment {
@@ -54,10 +57,28 @@ public class ShopFragment extends Fragment {
 
         nameText = rootView.findViewById(R.id.name); nameText.setText(name);
         rankText= rootView.findViewById(R.id.rank); rankText.setText(rank);
-        distanceText = rootView.findViewById(R.id.distance); distanceText.setText(""+distance);
+        distanceText = rootView.findViewById(R.id.distance);
+        if(distance >= 1000) { double a = Math.round(distance/100); a /= 10; distanceText.setText(a + "km"); }
+        else { distanceText.setText(Integer.parseInt(String.valueOf(Math.round(distance))) + "m"); }
         imageView = (ImageView) rootView.findViewById(R.id.shopImage);
-        task = new ImageLoadTask(imageURL, imageView);
-        task.execute();
+
+        //가게 정보 팝업
+        LinearLayout shopLayout = rootView.findViewById(R.id.shopLayout);
+        shopLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment dialogFragment = new InfoFragment();
+                dialogFragment.show(getFragmentManager(), "InfoDialog");
+            }
+        });
+
+        if (imageURL.charAt(0) == 'd') {
+            imageView.setImageResource(R.drawable.no_image);
+        }
+        else {
+            task = new ImageLoadTask(imageURL, imageView);
+            task.execute();
+        }
 
         return rootView;
     }

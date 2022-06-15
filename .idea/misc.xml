@@ -4,17 +4,26 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable-v24/fragment_round.xml" value="0.1" />
+        <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable-v24/indicator_unselected.xml" value="0.1" />
         <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/btn_select.xml" value="0.1" />
         <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/button_round.xml" value="0.1" />
         <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/button_round_clicked.xml" value="0.1" />
         <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/button_select.xml" value="0.1" />
         <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/fragment_round.xml" value="0.1" />
+        <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/indicator_selected.xml" value="0.1" />
+        <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/indicator_unselected.xml" value="0.1" />
         <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/layour_round.xml" value="0.1" />
         <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/layout_round.xml" value="0.1" />
         <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/layout_round_background.xml" value="0.1" />
+        <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/layout_round_clicked.xml" value="0.1" />
+        <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/left_button.xml" value="0.12" />
+        <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/left_clicked_button.xml" value="0.1" />
+        <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/line.xml" value="0.1" />
+        <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/right_button.xml" value="0.1" />
+        <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/drawable/right_clicked_button.xml" value="0.1" />
         <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/font/font.xml" value="0.22" />
         <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/layout/activity_dislike.xml" value="0.1" />
-        <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/layout/activity_main.xml" value="0.3508500772797527" />
         <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/layout/fragment_dislike.xml" value="0.22" />
         <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/layout/fragment_info.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/osoyo/AndroidStudioProjects/MobileTest/app/src/main/res/layout/fragment_shop.xml" value="0.25" />

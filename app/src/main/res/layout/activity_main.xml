@@ -4,8 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="right"
+    android:background="#fafafa"
     android:orientation="vertical"
     tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/refresh"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:background="@drawable/refresh" />
+
+        <TextView
+            android:id="@+id/location_t"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="8dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#EFEFEF" />
 
     <LinearLayout
         android:id="@+id/PrefLayout"
@@ -19,7 +50,6 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_gravity="right"
-            android:layout_marginTop="5dp"
             android:layout_marginRight="7dp"
             android:layout_marginBottom="7dp"
             android:background="@drawable/dislike"
@@ -47,6 +77,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="3dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/hansik"
@@ -57,6 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="3dp"
                 android:layout_weight="1"
                 android:text="한식"
                 android:textStyle="normal" />
@@ -77,6 +109,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="3dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/yangsik"
@@ -87,6 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="3dp"
                 android:layout_weight="1"
                 android:text="양식"
                 android:textStyle="normal" />
@@ -106,6 +140,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="3dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/illsik"
@@ -116,6 +151,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="3dp"
                 android:layout_weight="1"
                 android:text="일식"
                 android:textStyle="normal" />
@@ -145,6 +181,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="3dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/jungsik"
@@ -155,6 +192,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="3dp"
                 android:layout_weight="1"
                 android:text="중식"
                 android:textStyle="normal" />
@@ -174,6 +212,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="3dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/bunsik"
@@ -184,6 +223,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="3dp"
                 android:layout_weight="1"
                 android:text="분식"
                 android:textStyle="normal" />
@@ -203,6 +243,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="3dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/fastfood"
@@ -213,14 +254,56 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="3dp"
                 android:layout_weight="1"
                 android:text="패스트푸드" />
         </LinearLayout>
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/leftBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/left_button"
+            android:minWidth="50dip"
+            android:minHeight="33dip"
+            android:text="거리순"
+            android:textColor="#919191"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/rightBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/right_button"
+            android:minWidth="50dip"
+            android:minHeight="33dip"
+            android:text="평점순"
+            android:textColor="#919191"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/food_t"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="74dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
     <FrameLayout
-        android:id="@+id/fragLayout"
         android:layout_width="match_parent"
         android:layout_height="320dp">
 
@@ -234,23 +317,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="10dp"
+            app:ci_drawable="@drawable/indicator_selected"
+            app:ci_drawable_unselected="@drawable/indicator_unselected"
+            app:ci_height="7dp"
+            app:ci_margin="4dp"
+            app:ci_width="7dp" />
     </FrameLayout>
 
     <LinearLayout
         android:id="@+id/InfoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/map"
+            android:layout_width="31dp"
+            android:layout_height="31dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/map"
+            android:visibility="invisible" />
 
         <android.widget.Button
             android:id="@+id/infoBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="7dp"
-            android:background="@drawable/info" />
+            android:layout_marginLeft="333dp"
+            android:background="@drawable/info"
+            android:visibility="invisible" />
 
     </LinearLayout>
 
