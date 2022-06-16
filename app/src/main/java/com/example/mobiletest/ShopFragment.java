@@ -56,7 +56,9 @@ public class ShopFragment extends Fragment {
         View rootView = (ViewGroup) inflater.inflate(R.layout.fragment_shop, container, false);
 
         nameText = rootView.findViewById(R.id.name); nameText.setText(name);
-        rankText= rootView.findViewById(R.id.rank); rankText.setText(rank);
+        rankText= rootView.findViewById(R.id.rank);
+        if(rank.charAt(1) != '.') rankText.setText("0.00");
+        else rankText.setText(rank);
         distanceText = rootView.findViewById(R.id.distance);
         if(distance >= 1000) { double a = Math.round(distance/100); a /= 10; distanceText.setText(a + "km"); }
         else { distanceText.setText(Integer.parseInt(String.valueOf(Math.round(distance))) + "m"); }

@@ -2,7 +2,6 @@ package com.example.mobiletest;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.viewpager2.widget.ViewPager2;
@@ -10,40 +9,28 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.location.Address;
-import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.common.api.Response;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Vector;
 
 import me.relex.circleindicator.CircleIndicator3;
@@ -90,13 +77,13 @@ public class MainActivity extends AppCompatActivity {
     TextView location_t;
     GpsTracker gpsTracker;
     double latitude, longitude;
-    String curAddress = null;
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
 
     boolean[] categoryFoods = new boolean[37];
     Vector<Vector<Integer>> categoryList = new Vector<Vector<Integer>>(6);
 
     int sortOption = 0; // 0: random / 1: dist / 2: rank
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,10 +95,10 @@ public class MainActivity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
-        //폰트 가져오기
+        // 폰트 가져오기
         customFont = ResourcesCompat.getFont(this, R.font.font_regular);
 
-        //현재주소 업데이트
+        /// 현재주소 업데이트
         ActivityCompat.requestPermissions(MainActivity.this, REQUIRED_PERMISSIONS, 100);
         location_t = findViewById(R.id.location_t);
         setLocation(); location_t.setText(getaddress());
@@ -129,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //비선호 팝업
+        // 비선호 팝업
         prefBtn = findViewById(R.id.dislikeBtn);
         prefBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //카테고리 레이아웃
+        // 카테고리 레이아웃
         for(int i = 0; i < 6; i++){
             categLayout[i] = findViewById(lId[i]);
             int index = i;
@@ -151,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        //카테고리 버튼
+        // 카테고리 버튼
         for(int i = 0; i < 6; i++){
             categBtn[i] = findViewById(cId[i]);
             int index = i;
@@ -163,12 +150,12 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        //카테고리 텍스트
+        // 카테고리 텍스트
         for(int i = 0; i < 6; i++) {
             categText[i] = findViewById(ctId[i]);
         }
 
-        //거리순
+        /// 거리순
         leftBtn = findViewById(R.id.leftBtn);
         leftBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //평점순
+        /// 평점순
         rightBtn = findViewById(R.id.rightBtn);
         rightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //가게 정보 팝업
+        // 가게 정보 팝업
         infoBtn = findViewById(R.id.infoBtn);
         infoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //지도 url
+        // 지도 url
         mapBtn = findViewById(R.id.map);
         mapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //selectBtn 클릭
+        /// selectBtn 클릭
         selectBtn = findViewById(R.id.selectBtn);
         selectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,7 +244,6 @@ public class MainActivity extends AppCompatActivity {
             categoryList.get(0).add(nameToIdx.get("쌈밥"));
             categoryList.get(0).add(nameToIdx.get("부대찌개"));
             categoryList.get(0).add(nameToIdx.get("찜닭"));
-            categoryList.get(0).add(nameToIdx.get("순대"));
             categoryList.get(0).add(nameToIdx.get("냉면"));
             categoryList.get(0).add(nameToIdx.get("고기"));
             categoryList.get(0).add(nameToIdx.get("족발"));
@@ -303,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //ViewPager, Indicator 설정
+    // ViewPager, Indicator 설정
     public void setPager(){
         //ViewPager2
         pager = findViewById(R.id.viewPager);
@@ -343,7 +329,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //레이아웃 클릭
+    // 레이아웃 클릭
     public void setClicked(int i){
         /*for(int j = 0; j < 6; j++){
             if(category[j] == true){ categLayout[j].setBackgroundResource(R.drawable.layout_round); category[j] = false; }
@@ -355,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
             categText[i].setTypeface(customFont); category[i] = false; }
     }
 
-    //크롤링 불러오기
+    /// 엑셀 불러오기
     public InputStream get_path() {
         try {
             InputStream temp_is = getBaseContext().getResources().getAssets().open("crawling.xls");
@@ -367,14 +353,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //경도,위도
+    // 경도,위도
     public void setLocation(){
         gpsTracker = new GpsTracker(MainActivity.this);
         latitude = gpsTracker.getLatitude();
         longitude = gpsTracker.getLongitude();
     }
 
-    //주소 가져오기
+    /// 주소 가져오기
     public String getaddress() {
         String finalAddress = "도로명주소 미발견";
         String finalAddress2 = "지번주소 미발견";
@@ -449,7 +435,6 @@ public class MainActivity extends AppCompatActivity {
                 if (address.results.length != 0) {
                     finalAddress = address.results[0].region.area2.name+" ";
                     finalAddress += address.results[0].region.area3.name+" ";
-                    finalAddress += address.results[0].region.area4.name+" ";
                     finalAddress += address.results[0].land.name+" ";
                     finalAddress += address.results[0].land.number1;
                 }
@@ -510,6 +495,7 @@ public class MainActivity extends AppCompatActivity {
         else{ return finalAddress2; }
     }
 
+    // 정렬 옵션 선택
     public void setSortOption() {
         // false, false : random
         if (!option[0] && !option[1]) sortOption = 0;
@@ -519,6 +505,7 @@ public class MainActivity extends AppCompatActivity {
         if (!option[0] && option[1]) sortOption = 2;
     }
 
+    // GetFood() 객체 생성
     public void CreateGetFood() {
         // 카테고리 업데이트
         for (int i=0; i<37; i++) categoryFoods[i] = false;
@@ -531,6 +518,7 @@ public class MainActivity extends AppCompatActivity {
         GF = new GetFood(context);
     }
 
+    // 정렬 옵션에 맞게 띄우기
     public void setSortedPage() {
         num_page = GF.SIZE; // 페이지 개수 지정
         setShop();
@@ -540,4 +528,5 @@ public class MainActivity extends AppCompatActivity {
         food_t = findViewById(R.id.food_t); food_t.setText(GF.food);
         Log.d("dist", latitude+","+longitude);
     }
+
 }

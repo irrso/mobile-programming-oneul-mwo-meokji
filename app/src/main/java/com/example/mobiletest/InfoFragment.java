@@ -66,7 +66,8 @@ public class InfoFragment extends DialogFragment {
             if(((MainActivity)MainActivity.context).pager.getCurrentItem() == i){
                 name.setText(((MainActivity)MainActivity.context).name[i]);
                 classification.setText(((MainActivity)MainActivity.context).classfication[i]);
-                phoneNum.setText(((MainActivity)MainActivity.context).phoneNum[i]);
+                if (((MainActivity)MainActivity.context).phoneNum[i].charAt(0) != '0') phoneNum.setText("전화번호 정보 없음");
+                else phoneNum.setText(((MainActivity)MainActivity.context).phoneNum[i]);
                 worktime.setText(((MainActivity)MainActivity.context).worktime[i]);
                 if(((MainActivity)MainActivity.context).name[i] != null){
                     phoneNum_t.setText("전화번호"); phoneImg.setVisibility(View.VISIBLE);
