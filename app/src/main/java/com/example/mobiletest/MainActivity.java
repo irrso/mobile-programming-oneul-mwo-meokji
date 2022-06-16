@@ -198,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 mapBtn.setVisibility(View.VISIBLE); infoBtn.setVisibility(View.VISIBLE);
                 leftBtn.setVisibility(View.VISIBLE); rightBtn.setVisibility(View.VISIBLE);
                 food_t = findViewById(R.id.food_t); food_t.setText(GF.food);
+                Toast.makeText(getApplicationContext(), latitude+","+longitude, Toast.LENGTH_LONG).show();
                 Log.d("dist", latitude+","+longitude);
             }
         });
@@ -354,7 +355,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Address curAddress = address.get(0);
         String str = curAddress.getAddressLine(0).toString()+"\n";
-        //str = str.substring(str.indexOf("도 ")+2);
+        str = str.substring(str.indexOf("도 ")+2);
         return str;
     }
 
