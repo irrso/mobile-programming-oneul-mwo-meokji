@@ -17,6 +17,9 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,8 +28,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Response;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -82,22 +96,36 @@ public class MainActivity extends AppCompatActivity {
     boolean[] categoryFoods = new boolean[37];
     Vector<Vector<Integer>> categoryList = new Vector<Vector<Integer>>(6);
 
+    int sortOption = 0; // 0: random / 1: dist / 2: rank
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
         //폰트 가져오기
         customFont = ResourcesCompat.getFont(this, R.font.font_regular);
 
         //현재주소 업데이트
         ActivityCompat.requestPermissions(MainActivity.this, REQUIRED_PERMISSIONS, 100);
-        setAddress();
+        location_t = findViewById(R.id.location_t);
+        setLocation(); location_t.setText(getaddress());
         refreshBtn = findViewById(R.id.refresh);
         refreshBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAddress();
+                setLocation();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        location_t.setText(getaddress());
+                    }
+                });
             }
         });
 
@@ -140,21 +168,35 @@ public class MainActivity extends AppCompatActivity {
             categText[i] = findViewById(ctId[i]);
         }
 
-        //거리순, 평점순
+        //거리순
         leftBtn = findViewById(R.id.leftBtn);
         leftBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(option[0] == true){ leftBtn.setBackgroundResource(R.drawable.left_clicked_button); leftBtn.setTextColor(Color.WHITE); option[0] = false;}
-                else { leftBtn.setBackgroundResource(R.drawable.left_button); leftBtn.setTextColor(Color.parseColor("#919191")); option[0] = true;}
+                if(option[0] == false) {
+                    if (option[1]) { rightBtn.setBackgroundResource(R.drawable.right_button); rightBtn.setTextColor(Color.parseColor("#919191")); option[1] = false; }
+                    leftBtn.setBackgroundResource(R.drawable.left_clicked_button);
+                    leftBtn.setTextColor(Color.WHITE);
+                    option[0] = true;}
+                else { leftBtn.setBackgroundResource(R.drawable.left_button); leftBtn.setTextColor(Color.parseColor("#919191")); option[0] = false; }
+                setSortOption();
+                setSortedPage();
             }
         });
+
+        //평점순
         rightBtn = findViewById(R.id.rightBtn);
         rightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(option[1] == true){ rightBtn.setBackgroundResource(R.drawable.right_clicked_button); rightBtn.setTextColor(Color.WHITE); option[1] = false;}
-                else { rightBtn.setBackgroundResource(R.drawable.right_button); rightBtn.setTextColor(Color.parseColor("#919191")); option[1] = true;}
+                if(option[1] == false){
+                    if (option[0]) { leftBtn.setBackgroundResource(R.drawable.left_button); leftBtn.setTextColor(Color.parseColor("#919191")); option[0] = false; }
+                    rightBtn.setBackgroundResource(R.drawable.right_clicked_button);
+                    rightBtn.setTextColor(Color.WHITE);
+                    option[1] = true;}
+                else { rightBtn.setBackgroundResource(R.drawable.right_button); rightBtn.setTextColor(Color.parseColor("#919191")); option[1] = false; }
+                setSortOption();
+                setSortedPage();
             }
         });
 
@@ -179,27 +221,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // selectBtn 클릭
+        //selectBtn 클릭
         selectBtn = findViewById(R.id.selectBtn);
         selectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // 카테고리 업데이트
-                for (int i=0; i<37; i++) categoryFoods[i] = false;
-                for (int i=0; i<6; i++) {
-                    if (category[i]) {
-                        for (Integer j : categoryList.get(i)) categoryFoods[j] = true;
-                    }
-                }
-                GF = new GetFood(context);
-                num_page = GF.SIZE;
-                setShop();
-                setPager();
-                mapBtn.setVisibility(View.VISIBLE); infoBtn.setVisibility(View.VISIBLE);
-                leftBtn.setVisibility(View.VISIBLE); rightBtn.setVisibility(View.VISIBLE);
-                food_t = findViewById(R.id.food_t); food_t.setText(GF.food);
-                Toast.makeText(getApplicationContext(), latitude+","+longitude, Toast.LENGTH_LONG).show();
-                Log.d("dist", latitude+","+longitude);
+                CreateGetFood(); // GetFood() 객체 생성
+                setSortedPage(); // 옵션에 맞게 가게 띄우기
             }
         });
 
@@ -299,14 +327,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setShop(){
+        Vector<Vector<BasicInfo>> v = new Vector<Vector<BasicInfo>>(); {
+            v.add(GF.randomInfo);
+            v.add(GF.distanceInfo);
+            v.add(GF.rankInfo);
+        }
         for (int i=0; i<GF.SIZE; i++) {
-            name[i] = GF.randomInfo.get(i).name;
-            classfication[i] = GF.randomInfo.get(i).classification;
-            rank[i] = GF.randomInfo.get(i).rank;
-            phoneNum[i] = GF.randomInfo.get(i).phoneNum;
-            imageURL[i] = GF.randomInfo.get(i).imageURL;
-            worktime[i] = GF.randomInfo.get(i).workTime;
-            distance[i] = GF.randomInfo.get(i).distance;
+            name[i] = v.get(sortOption).get(i).name;
+            classfication[i] = v.get(sortOption).get(i).classification;
+            rank[i] = v.get(sortOption).get(i).rank;
+            phoneNum[i] = v.get(sortOption).get(i).phoneNum;
+            imageURL[i] = v.get(sortOption).get(i).imageURL;
+            worktime[i] = v.get(sortOption).get(i).workTime;
+            distance[i] = v.get(sortOption).get(i).distance;
         }
     }
 
@@ -334,41 +367,177 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //주소 불러오기
-    public String getCurrentAddress( double latitude, double longitude) throws IOException {
-        //GPS를 주소로 변환
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-        List<Address> address;
-
-        try {
-            address = geocoder.getFromLocation(latitude, longitude, 7);
-        } catch (IOException ioException) {
-            //네트워크 문제
-            return "네트워크 확인";
-        } catch (IllegalArgumentException illegalArgumentException) {
-            return "잘못된 GPS 좌표";
-        }
-
-        if (address == null || address.size() == 0) {
-            return "주소 미발견";
-
-        }
-        Address curAddress = address.get(0);
-        String str = curAddress.getAddressLine(0).toString()+"\n";
-        str = str.substring(str.indexOf("도 ")+2);
-        return str;
-    }
-
-    public void setAddress(){
+    //경도,위도
+    public void setLocation(){
         gpsTracker = new GpsTracker(MainActivity.this);
         latitude = gpsTracker.getLatitude();
         longitude = gpsTracker.getLongitude();
+    }
+
+    //주소 가져오기
+    public String getaddress() {
+        String finalAddress = "도로명주소 미발견";
+        String finalAddress2 = "지번주소 미발견";
         try {
-            curAddress = getCurrentAddress(latitude, longitude);
+            BufferedReader bufferedReader = null;
+            StringBuilder stringBuilder = new StringBuilder();
+            String coord = longitude+","+latitude;
+            Log.d("coord", coord);
+            String query = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?request=coordsToaddr&coords="
+                    + coord + "&sourcecrs=epsg:4326&output=json&orders=roadaddr&output=xml";
+            URL url = null;
+            HttpURLConnection conn = null;
+
+            BufferedReader bufferedReader2 = null;
+            StringBuilder stringBuilder2 = new StringBuilder();
+            String query2 = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?request=coordsToaddr&coords="
+                    + coord + "&sourcecrs=epsg:4326&output=json&orders=addr&output=xml";
+            URL url2 = null;
+            HttpURLConnection conn2 = null;
+
+            try {
+                url = new URL(query);
+                url2 = new URL(query2);
+                Log.d("request", "URL 됨");
+            } catch (MalformedURLException e) {
+                Log.d("request", "URL 안됨");
+            }
+            try {
+                conn = (HttpURLConnection) url.openConnection();
+                conn2 = (HttpURLConnection) url2.openConnection();
+            } catch (IOException e) {
+                Log.d("request", "http 안됨");
+            }
+
+            //도로명 주소
+            if (conn != null) {
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(5000);
+                try {
+                    conn.setRequestMethod("GET");
+                    Log.d("request", "conn 됨");
+                } catch (ProtocolException e) {
+                    Log.d("request", "conn 안됨");
+                }
+                conn.setRequestProperty("X-NCP-APIGW-API-KEY-ID", "3hxuop6xkd");
+                conn.setRequestProperty("X-NCP-APIGW-API-KEY", "illyoSwD97UiNVfZs4SI4eso09HNJ0CHjHAeRgh2");
+                conn.setDoInput(true);
+
+                int responseCode = 0;
+                try {
+                    responseCode = conn.getResponseCode();
+                    Log.d("request", responseCode + "");
+                } catch (IOException e) {
+                    Log.d("request", "responseCode 안됨");
+                }
+
+                if (responseCode == 200) {
+                    bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                } else {
+                    bufferedReader = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+                    Log.d("request", "if responseCode 안됨");
+                }
+
+                String line = null;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line + "\n");
+                }
+
+                Gson gson = new Gson();
+                Log.d("request", String.valueOf(stringBuilder));
+                Addresses address = gson.fromJson(String.valueOf(stringBuilder), Addresses.class);
+                if (address.results.length != 0) {
+                    finalAddress = address.results[0].region.area2.name+" ";
+                    finalAddress += address.results[0].region.area3.name+" ";
+                    finalAddress += address.results[0].region.area4.name+" ";
+                    finalAddress += address.results[0].land.name+" ";
+                    finalAddress += address.results[0].land.number1;
+                }
+                Log.d("request", finalAddress);
+                bufferedReader.close();
+                conn.disconnect();
+            }
+
+            //지번 주소
+            if (conn2 != null) {
+                conn2.setConnectTimeout(5000);
+                conn2.setReadTimeout(5000);
+                try {
+                    conn2.setRequestMethod("GET");
+                    Log.d("request2", "conn 됨");
+                } catch (ProtocolException e) {
+                    Log.d("request2", "conn 안됨");
+                }
+                conn2.setRequestProperty("X-NCP-APIGW-API-KEY-ID", "3hxuop6xkd");
+                conn2.setRequestProperty("X-NCP-APIGW-API-KEY", "illyoSwD97UiNVfZs4SI4eso09HNJ0CHjHAeRgh2");
+                conn2.setDoInput(true);
+
+                int responseCode2 = 0;
+                try {
+                    responseCode2 = conn.getResponseCode();
+                    Log.d("request2", responseCode2 + "");
+                } catch (IOException e) {
+                    Log.d("request2", "responseCode 안됨");
+                }
+
+                if (responseCode2 == 200) {
+                    bufferedReader2 = new BufferedReader(new InputStreamReader(conn2.getInputStream()));
+                } else {
+                    bufferedReader2 = new BufferedReader(new InputStreamReader(conn2.getErrorStream()));
+                    Log.d("request", "if responseCode 안됨");
+                }
+
+                String line2 = null;
+                while ((line2 = bufferedReader2.readLine()) != null) {
+                    stringBuilder2.append(line2 + "\n");
+                }
+
+                Gson gson2 = new Gson();
+                Log.d("request2", String.valueOf(stringBuilder2));
+                Addresses address2 = gson2.fromJson(String.valueOf(stringBuilder2), Addresses.class);
+                finalAddress2 = address2.results[0].region.area2.name+" ";
+                finalAddress2 += address2.results[0].region.area3.name+" ";
+                finalAddress2 += address2.results[0].land.number1+"-";
+                finalAddress2 += address2.results[0].land.number2;
+                Log.d("request2", finalAddress2);
+                bufferedReader2.close();
+                conn2.disconnect();
+            }
         } catch (IOException e) {
-            Log.d("location", "실행 안됨");
+            e.printStackTrace();
         }
-        location_t = findViewById(R.id.location_t);
-        location_t.setText(curAddress);
+        if(finalAddress != "도로명주소 미발견"){ return finalAddress; }
+        else{ return finalAddress2; }
+    }
+
+    public void setSortOption() {
+        // false, false : random
+        if (!option[0] && !option[1]) sortOption = 0;
+        // true, false : dist 정렬
+        if (option[0] && !option[1]) sortOption = 1;
+        // false, true : rank 정렬
+        if (!option[0] && option[1]) sortOption = 2;
+    }
+
+    public void CreateGetFood() {
+        // 카테고리 업데이트
+        for (int i=0; i<37; i++) categoryFoods[i] = false;
+        for (int i=0; i<6; i++) {
+            if (category[i]) {
+                for (Integer j : categoryList.get(i)) categoryFoods[j] = true;
+            }
+        }
+        // GetFood 객체 생성
+        GF = new GetFood(context);
+    }
+
+    public void setSortedPage() {
+        num_page = GF.SIZE; // 페이지 개수 지정
+        setShop();
+        setPager();
+        mapBtn.setVisibility(View.VISIBLE); infoBtn.setVisibility(View.VISIBLE);
+        leftBtn.setVisibility(View.VISIBLE); rightBtn.setVisibility(View.VISIBLE);
+        food_t = findViewById(R.id.food_t); food_t.setText(GF.food);
+        Log.d("dist", latitude+","+longitude);
     }
 }
