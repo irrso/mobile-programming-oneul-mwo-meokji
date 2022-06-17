@@ -331,9 +331,6 @@ public class MainActivity extends AppCompatActivity {
 
     // 레이아웃 클릭
     public void setClicked(int i){
-        /*for(int j = 0; j < 6; j++){
-            if(category[j] == true){ categLayout[j].setBackgroundResource(R.drawable.layout_round); category[j] = false; }
-        }*/
         if(category[i] == false){
             categLayout[i].setBackgroundResource(R.drawable.layout_round_clicked);
             categText[i].setTypeface(customFont, Typeface.BOLD); category[i] = true; }
@@ -482,8 +479,8 @@ public class MainActivity extends AppCompatActivity {
                 Addresses address2 = gson2.fromJson(String.valueOf(stringBuilder2), Addresses.class);
                 finalAddress2 = address2.results[0].region.area2.name+" ";
                 finalAddress2 += address2.results[0].region.area3.name+" ";
-                finalAddress2 += address2.results[0].land.number1+"-";
-                finalAddress2 += address2.results[0].land.number2;
+                finalAddress2 += address2.results[0].land.number1;
+                if (address2.results[0].land.number2.length() != 0) finalAddress2 += "-" + address2.results[0].land.number2;
                 Log.d("request2", finalAddress2);
                 bufferedReader2.close();
                 conn2.disconnect();

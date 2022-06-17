@@ -48,7 +48,7 @@ public class DislikeFragment extends DialogFragment {
             }
         });
 
-        //비선호 버튼 클릭
+        // 비선호 버튼 클릭
         for(int i = 0; i < 37; i++){
             disBtn[i] = view.findViewById(dId[i]);
             int index = i;
@@ -56,6 +56,14 @@ public class DislikeFragment extends DialogFragment {
                 @Override
                 public void onClick(View view) {
                     setClicked(index);
+                }
+            });
+            // 길게 누르면 선호 쌉가능
+            disBtn[i].setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    setLongClicked(index);
+                    return true;
                 }
             });
         }
@@ -72,5 +80,14 @@ public class DislikeFragment extends DialogFragment {
     public void setClicked(int i){
         if(((MainActivity)MainActivity.context).dislike[i] == false){ disBtn[i].setBackgroundResource(R.drawable.button_round_clicked); disBtn[i].setTextColor(Color.WHITE); ((MainActivity)MainActivity.context).dislike[i] = true;}
         else{ disBtn[i].setBackgroundResource(R.drawable.button_round); disBtn[i].setTextColor(Color.parseColor("#919191")); ((MainActivity)MainActivity.context).dislike[i] = false; }
+    }
+
+    public void setLongClicked(int idx) {
+        for (int i=0; i<37; i++) {
+            disBtn[i].setBackgroundResource(R.drawable.button_round_clicked);
+            disBtn[i].setTextColor(Color.WHITE);
+            ((MainActivity)MainActivity.context).dislike[i] = true;
+        }
+        setClicked(idx);
     }
 }
