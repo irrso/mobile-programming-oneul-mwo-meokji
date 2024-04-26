@@ -141,7 +141,9 @@
 
 ## 시스템 개요
 <!--xml 레이아웃--> <!--MainActivity, CreateBasicInfo, DislikeFragment, GetFood, InfoFragment, ShopFragment 구조-->
-<br>
+### 클래스 다이어그램
+<img src="https://github.com/irrso/mobile-programming-oneul-mwo-meokji/assets/105829324/96cc8cf7-1d36-4128-b8fa-a616c9b0d801">
+<br><br>
 
 ## 시스템 기능
 ### 주소 가져오기
@@ -790,7 +792,7 @@
   ```
 </details>
 
-## 토스트 메시지
+### 토스트 메시지
 - 비선호 음식 선택과 카테고리 기능을 통해 추천할 수 있는 음식이 존재하지 않는 경우 알림
 - 정상 작동을 위해 비선호 음식 선택을 배제하여 카테고리 만으로 음식을 추천
 <img src="https://github.com/irrso/mobile-programming-oneul-mwo-meokji/assets/105829324/a21b9657-d76c-42f4-8fd4-e9f53f25db35">
