@@ -152,6 +152,8 @@
    [^id1]: 🚩 초기에는 `Geocoder` 클래스를 사용하였지만, 도로명 주소로 변환되지 않아 정확한 주소를 받아 올 수 없어 변경
 - HTTP 요청을 보내고 응답을 받아 도로명 주소를 가져옴
 - 도로명 주소 미발견 시 지번 주소를 가져옴
+<img src="https://github.com/irrso/mobile-programming-oneul-mwo-meokji/assets/105829324/bb890c4a-16cc-42d1-83ea-a7f712d0e5a8">
+
 <details>
     <summary> <img src="https://img.shields.io/badge/MainActivity.Java-007396.svg?style=flat-square"/> </summary>
 
@@ -324,8 +326,10 @@
 </details>
 
 ### 팝업창 띄우기
-- `DialogFragment`를 커스텀하여 팝업창 형식으로 구현 [^id2]
+- `DialogFragment`를 `custom_dialog`로 커스텀하여 팝업창 형식으로 구현 [^id2]
   [^id2]: 🚩 초기에는 `ExpendableListView`로 구현하였으나 사용 편의성을 위해 팝업 형식으로 구현
+<img src="https://github.com/irrso/mobile-programming-oneul-mwo-meokji/assets/105829324/0b710bcc-a031-4569-b340-5375e02e50d1" width="20%" height="auto">
+<img src="https://github.com/irrso/mobile-programming-oneul-mwo-meokji/assets/105829324/8e090c4e-374d-4a83-b008-e76b4fd794ab" width="20%" height="auto">
 
 <details>
     <summary> <img src="https://img.shields.io/badge/DislikeFragment.Java-007396.svg?style=flat-square"/> </summary>
@@ -341,15 +345,6 @@
             R.id.sandwitch, R.id.toast, R.id.kebap, R.id.soba, R.id.ramen, R.id.chobap, R.id.hoe, R.id.yeoneh, R.id.oodong, R.id.kare,
             R.id.zzazangmyen, R.id.zzamppong, R.id.maratang, R.id.tangsuyook, R.id.tteokboki, R.id.kimbap, R.id.chicken
     };
-
-    /*public DislikeFragment() {
-        // Required empty public constructor
-    }
-
-    public static DislikeFragment newInstance(String param1, String param2) {
-        DislikeFragment fragment = new DislikeFragment();
-        return fragment;
-    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -425,17 +420,6 @@
     Button closeBtn2, phoneImg, timeImg;
     TextView name, classification, phoneNum, phoneNum_t, worktime, worktime_t;
 
-    /*public InfoFragment() {
-        // Required empty public constructor
-    }
-
-    public static InfoFragment newInstance(String param1, String param2) {
-        InfoFragment fragment = new InfoFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }*/
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -484,6 +468,22 @@
         }
     }
 }
+  ```
+</details>
+
+<details>
+    <summary> <img src="https://img.shields.io/badge/themes.xml-007396.svg?style=flat-square"/> </summary>
+
+  ```Java
+   <style name="custom_dialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:textViewStyle">@style/custom_textFont</item>
+        <item name="android:buttonStyle">@style/custom_btnFont</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.8</item>
+    </style>
   ```
 </details>
 
@@ -734,6 +734,7 @@
 ### 음식점 화면 구성
 - `ViewPager2`를 사용하여 음식점 화면을 옆으로 넘길 수 있게 구현
 - `CircleIndicator3`를 사용하여 현재 페이지의 인덱스를 표현
+<img src="https://github.com/irrso/mobile-programming-oneul-mwo-meokji/assets/105829324/eb06abc6-7eac-4340-b75c-5125bc22573d" width="50%" height="auto">
 
 <details>
     <summary> <img src="https://img.shields.io/badge/MainActivity.Java-007396.svg?style=flat-square"/> </summary>
